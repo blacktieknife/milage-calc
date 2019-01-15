@@ -4,6 +4,7 @@ import {connectRouter} from "lit-redux-router";
 import './components/MapComponent.js';
 import './components/TripBuilder.js';
 import './components/WelcomeComponent.js';
+import './components/DayCounter.js';
 
 import store from "./store.js";
 
@@ -23,35 +24,95 @@ class App extends LitElement {
         this.clearMap = false;
     }
     render() {
+        if(this.tripStats === null) {
+            this.fadeComponent('welcome')
+        } else {
+            this.fadeComponent('trip')
+        }
         return html`
             <div id="app">
                 <map-component 
                     .clearMap=${this.clearMap}
                     @updateTripStats=${this.handleUpdateTripStats} 
                 >
-                </map-component> 
+                </map-component>
+                <day-counter></day-counter> 
                 <div style="position:relative;">
-                    <div class="fade" style="${this.tripStats == null ? `display:none;opacity:0;z-index:0;`: `display:'';opacity:1;z-index:2;`};position:absolute;width:100%;">
+                    <div class="tripFade" style="position:absolute;width:100%;">
                         <trip-builder 
                             .tripStats=${this.tripStats}
                             @clearMap=${this.handleClearMap}
                         >
                         </trip-builder>
                     </div>
-                    <div class="fade" style="${this.tripStats !== null ? `opacity:0;z-index:0;`: `opacity:1;z-index:2;`};position:absolute;width:100%;">
+                    <div class="welcomeFade" style="position:absolute;width:100%;">
                         <welcome-component></welcome-component>
                     </div>
                 </div>
             </div>
             <style>
-                :host{
+                #app{
+                    height:100%;
+                    background-color:#C5CAE9;
+                }
+                .welcomeFade, .tripFade{
+                    opactiy:0;
+                    background-color:#C5CAE9;
+                    transition:opacity .5s;
+                }
+                  /* Small devices (portrait tablets and large phones, 600px and up) */
+                  /* @media only screen and (min-width: 600px) {
                    
-                }
-                .fade {
-                    transition:opacity 1s;
-                }
+                }  */
+
+                /* Medium devices (landscape tablets, 768px and up) */
+                /* @media only screen and (min-width: 768px) {
+                   
+                }  */
+
+                /* Large devices (laptops/desktops, 992px and up) */
+                /* @media only screen and (min-width: 992px) {
+                    
+                }  */
+
+                /* Extra large devices (large laptops and desktops, 1200px and up) */
+                /* @media only screen and (min-width: 1200px) {
+                   
+                }     */
             </style>
         `;
+    }
+    firstUpdated(changedProperties) {
+        this.tripFadeElement = this.shadowRoot.querySelector('.tripFade');
+        this.welcomeFadeElement = this.shadowRoot.querySelector('.welcomeFade');
+      
+    }
+    fadeComponent(component) {
+        switch(component) {
+            case "welcome":
+                setTimeout(()=>{
+                    this.welcomeFadeElement ? this.welcomeFadeElement.style.opacity = 1 : false;
+                    this.tripFadeElement ? this.tripFadeElement.style.opacity = 0 : false;
+                    this.welcomeFadeElement ? this.welcomeFadeElement.style.zIndex = 2 : false;
+                    this.tripFadeElement ? this.tripFadeElement.style.zIndex = 0 : false;
+                    setTimeout(()=>{
+                        this.tripFadeElement ? this.tripFadeElement.style.display = 'none' : false;
+                    },505);
+                }, 2)  
+            break;
+            case "trip":
+                setTimeout(()=>{
+                    this.tripFadeElement ? this.tripFadeElement.style.display = 'block' : false;
+                    this.welcomeFadeElement ? this.welcomeFadeElement.style.opacity = 0 : false;
+                    setTimeout(()=>{
+                        this.tripFadeElement ? this.tripFadeElement.style.opacity = 1 : false;
+                        this.welcomeFadeElement ? this.welcomeFadeElement.style.zIndex = 0 : false;
+                        this.tripFadeElement ? this.tripFadeElement.style.zIndex = 2 : false;
+                    },5)
+                }, 2)
+
+            break;
+        }
     }
     handleUpdateTripStats(e) {
         this.tripStats = e.detail;
@@ -60,7 +121,7 @@ class App extends LitElement {
         this.clearMap = true;
         setTimeout(()=>{
             this.clearMap = false;
-        }, 300)
+        }, 150)
     }
 }
 

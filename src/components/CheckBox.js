@@ -23,9 +23,6 @@ class CheckBox extends LitElement {
         this.checkColor = '';
     }
     render() {
-        if(this.focus) {
-            this.addFocu
-        }
         return html`
             <style>
                 input[type="checkbox"] {
@@ -91,26 +88,7 @@ class CheckBox extends LitElement {
 
                 .checkbox input[type="checkbox"]:focus + label::before {
                     outline: rgb(59, 153, 252) auto 5px;
-                }
-                  /* Small devices (portrait tablets and large phones, 600px and up) */
-                  @media only screen and (min-width: 600px) {
-                   
-                } 
-
-                /* Medium devices (landscape tablets, 768px and up) */
-                @media only screen and (min-width: 768px) {
-                   
-                } 
-
-                /* Large devices (laptops/desktops, 992px and up) */
-                @media only screen and (min-width: 992px) {
-                    
-                } 
-
-                /* Extra large devices (large laptops and desktops, 1200px and up) */
-                @media only screen and (min-width: 1200px) {
-                   
-                }               
+                }           
             </style>
             <div class="checkbox">
                 <input type="checkbox" .checked="${this.checked}" .name="${this.name}">

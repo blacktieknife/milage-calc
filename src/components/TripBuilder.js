@@ -82,13 +82,13 @@ class TripBuilder extends LitElement {
                     border-left:none;
                     border-right:none;
                     background-color:inherit;
-                    font-size:18pt;
+                    font-size:16pt;
                     text-align:center;
                     color:#333;
                 }
                 .day_input_label{
                    color:#333;
-                   font-size:17pt;
+                   font-size:14pt;
                    font-weight:bold;
                 }
                 .input{
@@ -171,6 +171,7 @@ class TripBuilder extends LitElement {
                         margin-left:auto;
                     }
                     .input_flex{
+                        margin-top:-5px;
                         margin-right:auto;
                     }
                     .grid-wrapper{

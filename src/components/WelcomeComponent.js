@@ -18,11 +18,11 @@ class Welcome extends LitElement {
             <div id="welcome_container">
                 <div class="header">Daily Driver Calculator</div>
                 <div class="content">
-                    <p>Calculate the total milage & time of your daily routes</p>
-                    To get started, click between two locations on the map.  The app will find an effeicent route <small>(using mapbox api)</small> between both locations
-                    & calculate the milage and time. For reacurring trips you can choose  "round trip" & number of 
-                    days per week you drive this route.  To add multiple routes you can save the route after it's 
-                    calculated and add as many as you like.
+                    <h2>Calculate the total milage & time of your daily routes</h2>
+                    <p>To get started, click between two locations on the map.  The app will find an effeicent route <small>(using mapbox api)</small> between both locations
+                    & calculate the milage and time. For your 'daily' routes you can choose "round trip" & number of 
+                    days per week you drive this route.</p><p><b>Note: </b>You can save the route after it's 
+                    calculated and add multiple routes.</p>
                     
                 </div>
                 <div class="actions"></div>
@@ -32,7 +32,7 @@ class Welcome extends LitElement {
                    
                 }
                 p{
-                    text-align:center;
+                    font-size:1.2em;
                 }
                 #welcome_container {
                     display:grid;
