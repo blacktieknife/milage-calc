@@ -1,6 +1,6 @@
 import {LitElement, html} from '../../assets/@polymer/lit-element/lit-element';
 import './CheckBox.js';
-
+import './DayCounter.js';
 
 class TripBuilder extends LitElement {
     static get properties() {
@@ -285,16 +285,13 @@ class TripBuilder extends LitElement {
                             </button>
                     <div class="control_grid">
                         <div class="input day_input">
-                            <label class="day_input_label" for="dayInput">Days per week</label>
-                            <input 
-                                id="dayInput"
-                                type="number" 
-                                max="7" 
-                                min="1" 
-                                .value=${this.daysPerWeek} 
-                                @input="${this.handleDaysPerWeek}"
-                                @click="${this.handleDaysPerWeekClick}"
-                            > 
+                            <day-counter
+                                fontSize="21pt"
+                                color="#333"
+                                @input="${(e)=>{this.daysPerWeek = e.detail}}"
+                            >
+                                <label class="day_input_label" for="dayInput">Days per week</label>
+                            </day-counter>
                         </div>
                         <div class="input_flex">
                             <check-box 
@@ -372,18 +369,9 @@ class TripBuilder extends LitElement {
             this.roundTrip = !this.roundTrip;
         }
     }
-    handleDaysPerWeek(e) {
-        if(e.target.value > 7) {
-            e.target.value = 7;
-        }
-        if(e.target.value < 1) {
-            e.target.value = 1;
-        }
-        this.daysPerWeek = e.target.value;
-    }
-    handleDaysPerWeekClick(e) {
-        e.target.select()
-    }
+    // handleDaysPerWeek(e) {
+    //     ;
+    // }
 }
 
 customElements.define("trip-builder", TripBuilder);

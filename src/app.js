@@ -4,7 +4,6 @@ import {connectRouter} from "lit-redux-router";
 import './components/MapComponent.js';
 import './components/TripBuilder.js';
 import './components/WelcomeComponent.js';
-import './components/DayCounter.js';
 
 import store from "./store.js";
 
@@ -36,7 +35,6 @@ class App extends LitElement {
                     @updateTripStats=${this.handleUpdateTripStats} 
                 >
                 </map-component>
-                <day-counter></day-counter> 
                 <div style="position:relative;">
                     <div class="tripFade" style="position:absolute;width:100%;">
                         <trip-builder 
@@ -56,7 +54,7 @@ class App extends LitElement {
                     background-color:#C5CAE9;
                 }
                 .welcomeFade, .tripFade{
-                    opactiy:0;
+                    opacity:0;
                     background-color:#C5CAE9;
                     transition:opacity .5s;
                 }
