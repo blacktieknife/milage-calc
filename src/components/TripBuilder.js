@@ -288,6 +288,7 @@ class TripBuilder extends LitElement {
                             <day-counter
                                 fontSize="21pt"
                                 color="#333"
+                                .value="${this.daysPerWeek}"
                                 @input="${(e)=>{this.daysPerWeek = e.detail}}"
                             >
                                 <label class="day_input_label" for="dayInput">Days per week</label>
